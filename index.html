@@ -1,267 +1,229 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Seventh Floor, Torreguadiaro — Beachfront apartment in Sotogrande</title>
-<meta name="description" content="A 130 m² three-bedroom apartment on the seventh floor in Torreguadiaro, Sotogrande, with uninterrupted views over the beach and the Mediterranean. Two bathrooms, master en suite, private terrace.">
-<meta property="og:title" content="Seventh Floor, Torreguadiaro — Beachfront apartment in Sotogrande">
-<meta property="og:description" content="130 m² · 3 double bedrooms · 2 bathrooms · 7th floor · Direct views over the beach">
-<meta property="og:image" content="img/og.jpg">
-<meta property="og:type" content="website">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Seventh Floor · Torreguadiaro, Sotogrande</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="Three-bedroom beachfront apartment on the seventh floor in Torreguadiaro, Sotogrande. 130 m², two bathrooms, master en suite, private terrace with uninterrupted sea views.">
+<meta property="og:title" content="Seventh Floor · Torreguadiaro, Sotogrande">
+<meta property="og:description" content="130 m² · 3 double bedrooms · 2 bathrooms · 7th floor · Front-line beach">
+<meta property="og:image" content="assets/foto1.jpg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="top" id="top">
-  <a class="brand" href="#top">Seventh Floor<span>Torreguadiaro · Sotogrande</span></a>
-  <nav class="nav" aria-label="Sections">
-    <a href="#residence">The residence</a>
-    <a href="#location">Location</a>
-    <a href="#details">Details</a>
-    <a class="nav-cta" href="#viewing">Request a viewing</a>
-  </nav>
-  <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
-    <span></span><span></span>
-  </button>
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="nav-brand">SEVENTH&nbsp;FLOOR</div>
+  <div class="nav-right">
+    <span class="nav-loc">Torreguadiaro · Sotogrande</span>
+    <a class="nav-cta" href="https://wa.me/34600000000?text=Hello%2C%20I%27m%20interested%20in%20the%20seventh-floor%20apartment%20in%20Torreguadiaro.%20I%27d%20like%20to%20arrange%20a%20viewing." target="_blank" rel="noopener">Request a viewing</a>
+  </div>
 </header>
-<nav class="mobile-nav" id="mobile-nav" aria-label="Sections" hidden>
-  <a href="#residence">The residence</a>
-  <a href="#location">Location</a>
-  <a href="#details">Details</a>
-  <a href="#viewing">Request a viewing</a>
-</nav>
 
-<main>
-
-<!-- ───────── SCENE 1: LIVING ROOM & TERRACE (hero) ───────── -->
-<section class="scene scene-hero" id="top-scene" data-scene data-src="scrub/living.mp4" data-full="video/living.mp4" data-poster="img/hero.jpg" style="--len: 420vh">
-  <div class="scene-pin">
-    <video class="scene-video" muted playsinline preload="auto" poster="img/hero.jpg" aria-hidden="true"></video>
-    <div class="scene-shade"></div>
-
-    <div class="scene-copy copy-hero" data-from="0" data-to="0.16">
-      <p class="hero-kicker">Beachfront · Torreguadiaro, Sotogrande</p>
-      <h1>Seven floors above the sand, <em>the sea is the only neighbour.</em></h1>
-      <p class="hero-sub">A 130 m² three-bedroom apartment with a private terrace looking straight out over the beach and the Mediterranean.</p>
-      <p class="scroll-cue"><span></span>Scroll to walk through</p>
-    </div>
-
-    <div class="scene-copy copy-left" data-from="0.24" data-to="0.47">
-      <p class="caption-index">Living room</p>
-      <h2>Where the apartment faces the horizon</h2>
-      <p>The living and dining room runs the full width of the sea-facing façade. Floor-to-ceiling glazing, afternoon light, and a view that changes with every tide.</p>
-    </div>
-
-    <div class="scene-copy copy-right" data-from="0.55" data-to="0.8">
-      <p class="caption-index">Terrace</p>
-      <h2>The best seat in the house for the sunset</h2>
-      <p>A private glazed terrace deep enough for a dining table and loungers, with the beach directly below, the bay curving away towards Sotogrande and the Rock of Gibraltar on the horizon. Usable all year.</p>
-    </div>
-
-    <ul class="scene-copy hero-facts" data-from="0.84" data-to="1" aria-label="Key facts">
-      <li><strong>130</strong><span>m² built</span></li>
-      <li><strong>3</strong><span>double bedrooms</span></li>
-      <li><strong>2</strong><span>bathrooms, one en suite</span></li>
-      <li><strong>7th</strong><span>floor, lift access</span></li>
-    </ul>
-
-    <button class="watch-btn" type="button" data-watch aria-label="Watch the living room and terrace video with sound">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      <span>Watch with sound</span>
-    </button>
-    <div class="scene-progress" aria-hidden="true"><span></span></div>
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-title">SEVENTH FLOOR</div>
+    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
   </div>
-</section>
+</div>
 
-<!-- ───────── INTERLUDE ───────── -->
-<section class="intro">
-  <div class="wrap intro-grid">
-    <h2>The last building before the water.</h2>
-    <div class="intro-text">
-      <p>Torreguadiaro is the quiet beach village at the eastern edge of Sotogrande, where the marina gives way to a long stretch of sand, a handful of chiringuitos and a promenade that runs for miles. This apartment sits on the seventh floor of a front-line building, so every principal room opens towards the sea rather than the street.</p>
-      <p>Inside, the layout is simple and generous: a wide living and dining room that flows onto the terrace, a separate fitted kitchen, three true double bedrooms and two bathrooms. It works equally well as a permanent home, a winter base or a lock-up-and-leave summer apartment ten minutes from the polo fields and the golf courses of Sotogrande.</p>
+<!-- ============ SCRUB 1 · LIVING ROOM & TERRACE ============ -->
+<section class="scrub" id="scrub1">
+  <div class="scrub-sticky">
+    <video id="video1" class="scrub-video" src="scrub/living.mp4" poster="assets/poster1.jpg" muted playsinline preload="auto"></video>
+    <div class="scrub-vignette"></div>
+
+    <!-- Hero (progress 0 – 0.14) -->
+    <div class="overlay hero-overlay" data-video="1" data-from="0" data-to="0.14">
+      <p class="eyebrow">Front-line beach · Torreguadiaro, Sotogrande</p>
+      <h1>Seventh<br>Floor</h1>
+      <p class="hero-sub">Three bedrooms. Private terrace over the sand.<br>The sea is the only neighbour.</p>
+      <div class="scroll-hint"><span></span>Scroll to walk through the apartment</div>
+    </div>
+
+    <!-- Caption: living room (0.2 – 0.42) -->
+    <div class="overlay caption caption-left" data-video="1" data-from="0.20" data-to="0.42">
+      <span class="cap-num">Living room</span>
+      <h2>A living room that<br>faces the horizon</h2>
+      <p>The living and dining room runs the full width of the sea-facing façade, with floor-to-ceiling glazing and light all afternoon.</p>
+    </div>
+
+    <!-- Caption: terrace (0.48 – 0.68) -->
+    <div class="overlay caption caption-right" data-video="1" data-from="0.48" data-to="0.68">
+      <span class="cap-num">Terrace</span>
+      <h2>The best seat<br>for the sunset</h2>
+      <p>A private glazed terrace with the beach directly below, the bay curving towards Sotogrande and Gibraltar on the horizon.</p>
+    </div>
+
+    <!-- Caption: day area (0.74 – 0.95) -->
+    <div class="overlay caption caption-left" data-video="1" data-from="0.74" data-to="0.95">
+      <span class="cap-num">Day area</span>
+      <h2>Open, bright,<br>and all year round</h2>
+      <p>Dining for eight, a lounge for the evenings and a terrace that works in January as well as July.</p>
     </div>
   </div>
 </section>
 
-<!-- ───────── SCENE 2: KITCHEN & GUEST ROOMS ───────── -->
-<section class="scene" id="residence" data-scene data-src="scrub/kitchen.mp4" data-full="video/kitchen.mp4" data-poster="img/kitchen.jpg" style="--len: 480vh">
-  <div class="scene-pin">
-    <video class="scene-video" muted playsinline preload="metadata" poster="img/kitchen.jpg" aria-hidden="true"></video>
-    <div class="scene-shade"></div>
+<!-- ============ BAND ============ -->
+<section class="band">
+  <div class="band-facts">
+    <div class="fact"><span class="fact-n">130</span><span class="fact-l">m² built</span></div>
+    <div class="fact"><span class="fact-n">3</span><span class="fact-l">Double bedrooms</span></div>
+    <div class="fact"><span class="fact-n">2</span><span class="fact-l">Bathrooms</span></div>
+    <div class="fact"><span class="fact-n">7th</span><span class="fact-l">Floor, with lift</span></div>
+  </div>
+  <h2 class="band-title">Through to the kitchen and bedrooms</h2>
+  <p class="band-sub">Separate kitchen, two guest bedrooms and the family bathroom</p>
+  <div class="band-arrow">↓</div>
+</section>
 
-    <div class="scene-copy copy-left" data-from="0.02" data-to="0.27">
-      <p class="caption-index">Kitchen</p>
-      <h2>A kitchen with its own door</h2>
-      <p>Separate and fully fitted, with integrated appliances and a utility area, so the living room stays calm when someone is cooking.</p>
+<!-- ============ SCRUB 2 · KITCHEN & GUEST ROOMS ============ -->
+<section class="scrub" id="scrub2">
+  <div class="scrub-sticky">
+    <video id="video2" class="scrub-video" src="scrub/kitchen.mp4" poster="assets/poster2.jpg" muted playsinline preload="metadata"></video>
+    <div class="scrub-vignette"></div>
+
+    <!-- Caption: kitchen (0.05 – 0.28) -->
+    <div class="overlay caption caption-left" data-video="2" data-from="0.05" data-to="0.28">
+      <span class="cap-num">Kitchen</span>
+      <h2>A fitted kitchen<br>with its own door</h2>
+      <p>Separate and fully equipped, with integrated appliances and a utility area, so the living room stays calm.</p>
     </div>
 
-    <div class="scene-copy copy-right" data-from="0.36" data-to="0.6">
-      <p class="caption-index">Guest bedroom one</p>
-      <h2>Room for family, and for guests who stay longer than planned</h2>
+    <!-- Caption: guest bedroom (0.35 – 0.6) -->
+    <div class="overlay caption caption-right" data-video="2" data-from="0.35" data-to="0.60">
+      <span class="cap-num">Guest bedroom</span>
+      <h2>Room for family<br>and for guests</h2>
       <p>A true double with fitted wardrobes, quiet and bright, and an easy study for anyone working between here and elsewhere.</p>
     </div>
 
-    <div class="scene-copy copy-left" data-from="0.7" data-to="0.95">
-      <p class="caption-index">Guest bedroom two <span>&amp;</span> family bathroom</p>
-      <h2>Two doubles sharing a bathroom with a walk-in shower</h2>
-      <p>Both take a proper double bed with space to spare. The family bathroom sits between them off the hallway.</p>
+    <!-- Caption: second bedroom + bathroom (0.68 – 0.95) -->
+    <div class="overlay caption caption-left" data-video="2" data-from="0.68" data-to="0.95">
+      <span class="cap-num">Second bedroom · Bathroom</span>
+      <h2>Two doubles sharing<br>a family bathroom</h2>
+      <p>Both bedrooms take a proper double bed with space to spare. The bathroom with walk-in shower sits between them.</p>
     </div>
-
-    <button class="watch-btn" type="button" data-watch aria-label="Watch the kitchen and guest rooms video with sound">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      <span>Watch with sound</span>
-    </button>
-    <div class="scene-progress" aria-hidden="true"><span></span></div>
   </div>
 </section>
 
-<!-- ───────── SCENE 3: MASTER & EN SUITE ───────── -->
-<section class="scene" data-scene data-src="scrub/master.mp4" data-full="video/master.mp4" data-poster="img/master.jpg" style="--len: 360vh">
-  <div class="scene-pin">
-    <video class="scene-video" muted playsinline preload="metadata" poster="img/master.jpg" aria-hidden="true"></video>
-    <div class="scene-shade"></div>
+<!-- ============ LAYOUT ============ -->
+<section class="planos" id="planos">
+  <div class="section-head">
+    <p class="eyebrow">The layout</p>
+    <h2>How the apartment is laid out</h2>
+  </div>
 
-    <div class="scene-copy copy-left" data-from="0.02" data-to="0.36">
-      <p class="caption-index">Master bedroom</p>
-      <h2>Wake up to the sea</h2>
-      <p>The principal bedroom looks straight out to sea through a wide picture window, with the rocks and the bay below. A full wall of fitted wardrobes keeps it uncluttered.</p>
+  <div class="plano-grid">
+    <article class="plano-card">
+      <div class="plano-img"><img src="assets/foto2.jpg" alt="Glazed terrace with the beach below" loading="lazy"></div>
+      <div class="plano-info">
+        <h3>Day area · Facing the sea</h3>
+        <ul>
+          <li>Living and dining room across the full sea-facing façade</li>
+          <li>Private glazed terrace, usable all year</li>
+          <li>Separate fitted kitchen with integrated appliances</li>
+          <li>Utility and laundry area</li>
+          <li>Entrance hall with fitted storage</li>
+          <li>Air conditioning, hot and cold, throughout</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="plano-card">
+      <div class="plano-img"><img src="assets/foto6.jpg" alt="Master bedroom with sea view" loading="lazy"></div>
+      <div class="plano-info">
+        <h3>Night area · Three bedrooms, two bathrooms</h3>
+        <ul>
+          <li>Master bedroom with sea-facing picture window</li>
+          <li>Private en suite bathroom with walk-in shower</li>
+          <li>Two further double bedrooms with fitted wardrobes</li>
+          <li>Family bathroom off the hallway</li>
+          <li>Blackout blinds in all bedrooms</li>
+          <li>Private parking space in the building</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ SCRUB 3 · MASTER & EN SUITE ============ -->
+<section class="scrub" id="scrub3">
+  <div class="scrub-sticky">
+    <video id="video3" class="scrub-video" src="scrub/master.mp4" poster="assets/poster3.jpg" muted playsinline preload="none"></video>
+    <div class="scrub-vignette"></div>
+
+    <!-- Caption: master (0.06 – 0.34) -->
+    <div class="overlay caption caption-left" data-video="3" data-from="0.06" data-to="0.34">
+      <span class="cap-num">Master bedroom</span>
+      <h2>Wake up<br>to the sea</h2>
+      <p>The principal bedroom looks straight out over the rocks and the bay through a wide picture window, with a full wall of fitted wardrobes.</p>
     </div>
 
-    <div class="scene-copy copy-right" data-from="0.5" data-to="0.92">
-      <p class="caption-index">En suite</p>
-      <h2>A private bathroom off the bedroom</h2>
+    <!-- Caption: en suite (0.42 – 0.72) -->
+    <div class="overlay caption caption-right" data-video="3" data-from="0.42" data-to="0.72">
+      <span class="cap-num">En suite</span>
+      <h2>A private bathroom<br>off the bedroom</h2>
       <p>Walk-in shower, generous storage and a window of its own. It is the room that sells the apartment to most people who see it.</p>
     </div>
 
-    <button class="watch-btn" type="button" data-watch aria-label="Watch the master bedroom and en suite video with sound">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      <span>Watch with sound</span>
-    </button>
-    <div class="scene-progress" aria-hidden="true"><span></span></div>
-  </div>
-</section>
-
-<!-- ───────── LOCATION ───────── -->
-<section class="location" id="location">
-  <div class="wrap">
-    <header class="section-head">
-      <h2>Torreguadiaro and Sotogrande</h2>
-      <p>A beach village with a world-class resort behind it.</p>
-    </header>
-    <div class="loc-grid">
-      <div class="loc-text">
-        <p>Torreguadiaro keeps the easy rhythm of a Cádiz beach town: a morning swim, coffee on the promenade, fish at a chiringuito with your feet almost in the sand. Walk west and within fifteen minutes you reach the marina at Puerto Sotogrande, with its restaurants, yacht club and Sunday market.</p>
-        <p>Behind the beach lies one of Europe's most complete sporting estates. Valderrama, Real Club de Golf Sotogrande, La Reserva and Almenara are all within a ten-minute drive, the polo season at Santa María Polo Club fills the summer, and the international schools make this a year-round community rather than a seasonal one.</p>
-        <p>Gibraltar airport is twenty minutes away, with direct flights to London, Manchester, Bristol and Edinburgh. Málaga is just over an hour up the coast.</p>
-      </div>
-      <dl class="distances" aria-label="Distances">
-        <div><dt>Beach</dt><dd>Direct access, below the building</dd></div>
-        <div><dt>Puerto Sotogrande marina</dt><dd>15 min walk · 4 min drive</dd></div>
-        <div><dt>Real Club Valderrama</dt><dd>8 min drive</dd></div>
-        <div><dt>Santa María Polo Club</dt><dd>7 min drive</dd></div>
-        <div><dt>Sotogrande International School</dt><dd>9 min drive</dd></div>
-        <div><dt>Gibraltar airport</dt><dd>20 min drive</dd></div>
-        <div><dt>Marbella</dt><dd>40 min drive</dd></div>
-        <div><dt>Málaga airport</dt><dd>1 h 10 min drive</dd></div>
-      </dl>
+    <!-- Caption: close (0.8 – 0.97) -->
+    <div class="overlay caption caption-left" data-video="3" data-from="0.80" data-to="0.97">
+      <span class="cap-num">Ready to move in</span>
+      <h2>Lock up,<br>leave, come back</h2>
+      <p>A permanent home, a winter base or a summer apartment ten minutes from the golf and the polo of Sotogrande.</p>
     </div>
   </div>
 </section>
 
-<!-- ───────── DETAILS ───────── -->
-<section class="details" id="details">
-  <div class="wrap">
-    <header class="section-head">
-      <h2>Details</h2>
-      <p>The facts, in one place.</p>
-    </header>
-    <div class="details-grid">
-      <dl class="spec-list">
-        <div><dt>Type</dt><dd>Apartment, front-line beach</dd></div>
-        <div><dt>Floor</dt><dd>Seventh, with lift</dd></div>
-        <div><dt>Built area</dt><dd>130 m²</dd></div>
-        <div><dt>Bedrooms</dt><dd>3 double</dd></div>
-        <div><dt>Bathrooms</dt><dd>2, master en suite</dd></div>
-        <div><dt>Terrace</dt><dd>Private, glazed, sea-facing</dd></div>
-        <div><dt>Orientation</dt><dd>South-west, sunset views</dd></div>
-        <div><dt>Views</dt><dd>Beach, Mediterranean, Gibraltar, Rif mountains</dd></div>
-      </dl>
-      <dl class="spec-list">
-        <div><dt>Kitchen</dt><dd>Independent, fully fitted</dd></div>
-        <div><dt>Climate</dt><dd>Air conditioning hot/cold throughout</dd></div>
-        <div><dt>Storage</dt><dd>Fitted wardrobes in all bedrooms</dd></div>
-        <div><dt>Parking</dt><dd>Private space in the building</dd></div>
-        <div><dt>Community</dt><dd>Gated, communal pool and gardens</dd></div>
-        <div><dt>Condition</dt><dd>Ready to move in</dd></div>
-        <div><dt>Price</dt><dd>On application</dd></div>
-        <div><dt>Reference</dt><dd>TG-7</dd></div>
-      </dl>
-    </div>
-    <p class="details-note">Measurements are approximate and taken from the property's cadastral and title records. Furniture shown in the videos is available by separate negotiation.</p>
+<!-- ============ GALLERY ============ -->
+<section class="galeria" id="galeria">
+  <div class="section-head">
+    <p class="eyebrow">The apartment in pictures</p>
+    <h2>Gallery</h2>
   </div>
+
+  <div class="carousel">
+    <button class="car-arrow car-prev" id="carPrev" aria-label="Previous">←</button>
+    <div class="car-viewport">
+      <div class="car-track" id="carTrack">
+        <div class="car-slide"><figure class="car-fig"><img src="assets/foto1.jpg" alt="Sunset over the beach from the terrace"><figcaption>Sunset from the terrace</figcaption></figure></div>
+        <div class="car-slide"><figure class="car-fig"><img src="assets/foto2.jpg" alt="Glazed terrace over the sea"><figcaption>The terrace, seven floors up</figcaption></figure></div>
+        <div class="car-slide"><figure class="car-fig"><img src="assets/foto3.jpg" alt="Living room"><figcaption>Living room</figcaption></figure></div>
+        <div class="car-slide"><figure class="car-fig"><img src="assets/foto4.jpg" alt="Fitted kitchen"><figcaption>Fitted kitchen</figcaption></figure></div>
+        <div class="car-slide"><figure class="car-fig"><img src="assets/foto5.jpg" alt="Guest bedroom"><figcaption>Guest bedroom</figcaption></figure></div>
+        <div class="car-slide"><figure class="car-fig"><img src="assets/foto6.jpg" alt="Master bedroom with sea view"><figcaption>Master bedroom</figcaption></figure></div>
+        <div class="car-slide"><figure class="car-fig"><img src="assets/foto7.jpg" alt="View of the rocks and the bay from the master bedroom"><figcaption>The bay, from the bedroom window</figcaption></figure></div>
+      </div>
+    </div>
+    <button class="car-arrow car-next" id="carNext" aria-label="Next">→</button>
+  </div>
+  <div class="car-dots" id="carDots"></div>
 </section>
 
-<!-- ───────── VIEWING ───────── -->
-<section class="viewing" id="viewing">
-  <div class="wrap viewing-grid">
-    <div class="viewing-copy">
-      <h2>See it in person</h2>
-      <p>Viewings are arranged privately, seven days a week, and the apartment is best seen in the late afternoon when the light comes across the water. If you are travelling from abroad, we can also arrange a live video walk-through at a time that suits you.</p>
-      <address>
-        <a href="tel:+34600000000">+34 600 000 000</a>
-        <a href="mailto:viewings@example.com">viewings@example.com</a>
-        <span>WhatsApp and English, Spanish, French spoken.</span>
-      </address>
-    </div>
-    <form class="viewing-form" action="mailto:viewings@example.com" method="post" enctype="text/plain" data-form>
-      <div class="field">
-        <label for="f-name">Name</label>
-        <input id="f-name" name="name" type="text" autocomplete="name" required>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="f-email">Email</label>
-          <input id="f-email" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="f-phone">Phone</label>
-          <input id="f-phone" name="phone" type="tel" autocomplete="tel">
-        </div>
-      </div>
-      <div class="field">
-        <label for="f-msg">When would you like to visit?</label>
-        <textarea id="f-msg" name="message" rows="4" placeholder="Dates, or whether you'd prefer a video call"></textarea>
-      </div>
-      <button class="btn btn-dark" type="submit">Request a viewing</button>
-      <p class="form-note">We reply within one working day. Your details are used only to arrange the viewing.</p>
-    </form>
-  </div>
-</section>
+<!-- ============ FOOTER / CONTACT ============ -->
+<footer class="footer" id="contacto">
+  <h2>Seventh Floor</h2>
+  <p>Front-line beach · Torreguadiaro, Sotogrande · Cádiz</p>
+  <a class="footer-cta" href="https://wa.me/34600000000?text=Hello%2C%20I%27m%20interested%20in%20the%20seventh-floor%20apartment%20in%20Torreguadiaro.%20I%27d%20like%20to%20arrange%20a%20private%20viewing." target="_blank" rel="noopener">Request a private viewing</a>
 
-</main>
-
-<footer class="foot">
-  <div class="wrap foot-grid">
-    <p class="foot-brand">Seventh Floor<span>Torreguadiaro · Sotogrande · Cádiz</span></p>
-    <p class="foot-legal">Information provided in good faith and believed to be accurate, but it does not form part of any contract. Energy certificate in process. Ref. TG-7.</p>
-    <p class="foot-copy">© 2026</p>
+  <div class="footer-brand">
+    <p class="footer-brand-name">Private sale</p>
+    <p class="footer-brand-role">Viewings seven days a week · English and Spanish</p>
+    <p class="footer-phones">
+      <a href="tel:+34600000000">600&nbsp;00&nbsp;00&nbsp;00</a>
+    </p>
   </div>
+
+  <p class="footer-small">© 2026 · Information given in good faith and not forming part of any contract · Ref. TG-7</p>
 </footer>
 
-<!-- Lightbox for full-screen video -->
-<div class="lightbox" id="lightbox" hidden>
-  <button class="lightbox-close" type="button" aria-label="Close video">
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-  </button>
-  <video class="lightbox-video" controls playsinline></video>
-</div>
-
-<script src="main.js" defer></script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="main.js"></script>
 </body>
 </html>

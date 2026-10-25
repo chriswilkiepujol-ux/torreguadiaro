@@ -1,204 +1,200 @@
-(function () {
-  'use strict';
+// ============ Setup ============
+const IS_MOBILE = window.matchMedia("(max-width: 768px)").matches || (navigator.maxTouchPoints > 1 && screen.width < 900);
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var top = document.querySelector('.top');
-  var firstScene = document.querySelector('.scene');
+const sections = [
+  { el: document.getElementById("scrub1"), video: document.getElementById("video1"), target: 0, current: 0 },
+  { el: document.getElementById("scrub2"), video: document.getElementById("video2"), target: 0, current: 0 },
+  { el: document.getElementById("scrub3"), video: document.getElementById("video3"), target: 0, current: 0 },
+];
 
-  /* ───────── Header: solid once past the first scene ───────── */
-  var sceneEls = document.querySelectorAll('.scene');
-  function headerState() {
-    var inScene = false;
-    for (var i = 0; i < sceneEls.length; i++) {
-      var r = sceneEls[i].getBoundingClientRect();
-      if (r.top <= 40 && r.bottom >= 40) { inScene = true; break; }
-    }
-    top.classList.toggle('is-solid', !inScene);
-  }
+// Phones get the 720p versions: same clips, a third of the weight
+if (IS_MOBILE) {
+  sections[0].video.src = "scrub/living_720.mp4";
+  sections[1].video.src = "scrub/kitchen_720.mp4";
+  sections[2].video.src = "scrub/master_720.mp4";
+}
 
-  /* ───────── Mobile menu ───────── */
-  var menuBtn = document.querySelector('.menu-btn');
-  var mobileNav = document.getElementById('mobile-nav');
-  function setMenu(open) {
-    menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    mobileNav.hidden = !open;
-    document.body.style.overflow = open ? 'hidden' : '';
-    if (open) top.classList.add('is-solid'); else headerState();
-  }
-  menuBtn.addEventListener('click', function () {
-    setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
-  });
-  mobileNav.querySelectorAll('a').forEach(function (a) {
-    a.addEventListener('click', function () { setMenu(false); });
-  });
+// The third clip is far down the page: load it only when the layout
+// section comes into view so it doesn't compete with the first two.
+let video3Loaded = false;
+function ensureVideo3() {
+  if (video3Loaded) return;
+  video3Loaded = true;
+  sections[2].video.preload = "auto";
+  sections[2].video.load();
+}
 
-  /* ───────── Lightbox (watch with sound) ───────── */
-  var lightbox = document.getElementById('lightbox');
-  var lbVideo = lightbox.querySelector('.lightbox-video');
-  var lbClose = lightbox.querySelector('.lightbox-close');
-  var lastTrigger = null;
-  function openLightbox(src, poster, trigger) {
-    lastTrigger = trigger;
-    lbVideo.src = src;
-    lbVideo.poster = poster || '';
-    lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
-    lbVideo.play().catch(function () {});
-    lbClose.focus();
-  }
-  function closeLightbox() {
-    lbVideo.pause();
-    lbVideo.removeAttribute('src');
-    lbVideo.load();
-    lightbox.hidden = true;
-    document.body.style.overflow = '';
-    if (lastTrigger) lastTrigger.focus();
-  }
-  lbClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      if (!lightbox.hidden) closeLightbox();
-      else if (menuBtn.getAttribute('aria-expanded') === 'true') setMenu(false);
-    }
-  });
+const overlays = Array.from(document.querySelectorAll(".overlay")).map((el) => ({
+  el,
+  video: el.dataset.video,
+  from: parseFloat(el.dataset.from),
+  to: parseFloat(el.dataset.to),
+}));
 
-  /* ───────── Scroll-scrubbed scenes ───────── */
-  var scenes = [];
-  document.querySelectorAll('[data-scene]').forEach(function (el) {
-    var video = el.querySelector('.scene-video');
-    var bar = el.querySelector('.scene-progress span');
-    var copies = Array.prototype.map.call(el.querySelectorAll('.scene-copy'), function (c) {
-      return { el: c, from: parseFloat(c.dataset.from), to: parseFloat(c.dataset.to), on: null };
+function clamp01(v) { return Math.min(1, Math.max(0, v)); }
+
+// ============ Lenis: smooth scrolling with inertia ============
+let lenis = null;
+if (window.Lenis) {
+  lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1 });
+  window._lenis = lenis;
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const target = document.querySelector(a.getAttribute("href"));
+      if (target) { e.preventDefault(); lenis.scrollTo(target, { duration: 1.4 }); }
     });
-    var scene = {
-      el: el, video: video, bar: bar, copies: copies,
-      src: el.dataset.src, full: el.dataset.full, poster: el.dataset.poster,
-      duration: 0, target: 0, current: 0, loaded: false, progress: 0, lastSeek: -1
-    };
-    var watch = el.querySelector('[data-watch]');
-    if (watch) watch.addEventListener('click', function () { openLightbox(scene.full, scene.poster, watch); });
-
-    if (reduceMotion) {
-      /* Reduced motion: plain looping video, no scrubbing */
-      el.classList.add('is-static');
-      video.src = scene.full;
-      video.loop = true;
-      video.autoplay = true;
-      video.load();
-      copies.forEach(function (c) { c.el.style.opacity = 1; c.el.style.transform = 'none'; });
-      return;
-    }
-
-    video.addEventListener('loadedmetadata', function () {
-      scene.duration = video.duration || 0;
-      scene.loaded = true;
-    });
-    video.src = scene.src;
-    scenes.push(scene);
   });
+}
 
-  /* iOS/Safari need one play() before currentTime renders frames. Unlock on first gesture. */
-  var unlocked = false;
-  function unlock() {
-    if (unlocked) return;
-    unlocked = true;
-    scenes.forEach(function (s) {
-      var p = s.video.play();
-      if (p && p.then) p.then(function () { s.video.pause(); }).catch(function () {});
-      else s.video.pause();
-    });
-  }
-  ['touchstart', 'pointerdown', 'keydown', 'wheel'].forEach(function (ev) {
-    window.addEventListener(ev, unlock, { once: true, passive: true });
-  });
+// ============ Scrubbing ============
+function sectionProgress(sec) {
+  const rect = sec.el.getBoundingClientRect();
+  const total = sec.el.offsetHeight - window.innerHeight;
+  if (total <= 0) return 0;
+  return clamp01(-rect.top / total);
+}
 
-  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
-  function ease(t) { return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
-
-  function updateScene(s) {
-    var rect = s.el.getBoundingClientRect();
-    var vh = window.innerHeight;
-    var total = rect.height - vh;
-    var p = clamp(-rect.top / total, 0, 1);
-    s.progress = p;
-
-    /* Warm the next scene's video when it is within a viewport of entering */
-    if (rect.top < vh * 1.5 && s.video.preload !== 'auto') {
-      s.video.preload = 'auto';
-      s.video.load();
+function updateOverlays(videoIndex, progress) {
+  for (const ov of overlays) {
+    if (ov.video !== String(videoIndex)) continue;
+    const span = ov.to - ov.from;
+    const fadeZone = Math.min(0.06, span * 0.25);
+    let opacity = 0;
+    if (progress >= ov.from && progress <= ov.to) {
+      // An overlay that starts at 0 is born visible (the hero)
+      const inFade = ov.from <= 0 ? 1 : clamp01((progress - ov.from) / fadeZone);
+      const outFade = clamp01((ov.to - progress) / fadeZone);
+      opacity = Math.min(inFade, outFade);
     }
-
-    /* Only scrub while the scene is on screen */
-    var visible = rect.bottom > 0 && rect.top < vh;
-    if (!visible) return;
-
-    if (s.loaded && s.duration) s.target = p * s.duration;
-    if (s.bar) s.bar.style.width = (p * 100).toFixed(2) + '%';
-
-    s.copies.forEach(function (c) {
-      var span = c.to - c.from;
-      var fade = Math.min(0.08, span * 0.3);
-      var o;
-      if (p < c.from || p > c.to) o = 0;
-      else if (c.from <= 0 && p < fade) o = 1; /* opening copy is on from the very top */
-      else if (p < c.from + fade) o = ease((p - c.from) / fade);
-      else if (p > c.to - fade) o = ease((c.to - p) / fade);
-      else o = 1;
-      if (c.to >= 1 && p >= c.to - fade) o = 1; /* last caption stays until the scene ends */
-      c.el.style.opacity = o.toFixed(3);
-      c.el.style.transform = 'translateY(' + ((1 - o) * 18).toFixed(1) + 'px)';
-      var on = o > 0.05;
-      if (on !== c.on) { c.on = on; c.el.classList.toggle('is-on', on); }
-    });
+    ov.el.style.opacity = opacity.toFixed(3);
+    ov.el.style.setProperty("--dy", `${((1 - opacity) * 24).toFixed(1)}px`);
   }
+}
 
-  var ticking = false;
-  function frame() {
-    ticking = false;
-    scenes.forEach(function (s) {
-      updateScene(s);
-      if (!s.loaded) return;
-      /* Smooth the seek so fast scrolling doesn't stutter */
-      var diff = s.target - s.current;
-      s.current += diff * 0.16;
-      if (Math.abs(diff) < 0.01) s.current = s.target;
-      if (Math.abs(s.current - s.lastSeek) > 0.02 && s.video.readyState >= 1) {
-        try { s.video.currentTime = s.current; s.lastSeek = s.current; } catch (e) {}
+// One loop: Lenis + progress + time smoothing + gated seek.
+// A new seek is only requested once the previous one has finished
+// (video.seeking === false), so seeks never queue up — queued seeks
+// are what produce the jumps.
+let lastT = performance.now();
+function frame(now) {
+  if (lenis) lenis.raf(now);
+
+  const dt = Math.min(0.05, (now - lastT) / 1000) || 0.016;
+  lastT = now;
+  const alpha = 1 - Math.exp(-dt * 9); // framerate-independent smoothing
+
+  sections.forEach((sec, i) => {
+    const p = sectionProgress(sec);
+    if (sec.video.duration) {
+      sec.target = p * Math.max(0, sec.video.duration - 0.05);
+    }
+    updateOverlays(i + 1, p);
+
+    if (sec.video.readyState >= 2) {
+      sec.current += (sec.target - sec.current) * alpha;
+      if (!sec.video.seeking && Math.abs(sec.video.currentTime - sec.current) > 0.02) {
+        sec.video.currentTime = sec.current;
       }
-      if (Math.abs(diff) > 0.011) requestTick();
-    });
-  }
-  function requestTick() {
-    if (!ticking) { ticking = true; requestAnimationFrame(frame); }
-  }
-  window.addEventListener('scroll', function () { requestTick(); headerState(); }, { passive: true });
-  window.addEventListener('resize', requestTick);
-  window.addEventListener('load', function () { requestTick(); headerState(); });
-  requestTick();
-  headerState();
+    }
+  });
 
-  /* ───────── Viewing form: build a mailto with the details filled in ───────── */
-  var form = document.querySelector('[data-form]');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var data = new FormData(form);
-      var to = form.getAttribute('action').replace('mailto:', '');
-      var subject = 'Viewing request — Seventh Floor, Torreguadiaro (Ref. TG-7)';
-      var body =
-        'Name: ' + data.get('name') + '\n' +
-        'Email: ' + data.get('email') + '\n' +
-        'Phone: ' + (data.get('phone') || '-') + '\n\n' +
-        (data.get('message') || '');
-      window.location.href = 'mailto:' + to +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
-      var note = document.createElement('p');
-      note.className = 'form-sent';
-      note.textContent = 'Your email app should now open with the request ready to send. If it did not, write to ' + to + ' and we will come back to you within one working day.';
-      form.replaceWith(note);
-    });
-  }
-})();
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+// iOS/Android: videos don't paint frames until a play(); force one on
+// the first touch and pause straight away.
+function unlockVideos() {
+  sections.forEach((sec) => {
+    sec.video.play().then(() => sec.video.pause()).catch(() => {});
+  });
+}
+window.addEventListener("touchstart", unlockVideos, { once: true, passive: true });
+
+// ============ Loader ============
+// Reveal the page as soon as the FIRST video has its first frame
+// (readyState >= 2). We don't wait for everything to download.
+const loader = document.getElementById("loader");
+const loaderFill = document.getElementById("loaderFill");
+let revealed = false;
+
+function reveal() {
+  if (revealed) return;
+  revealed = true;
+  loaderFill.style.width = "100%";
+  setTimeout(() => loader.classList.add("done"), 250);
+  // Once the first is visible, let the second preload fully
+  setTimeout(() => {
+    sections[1].video.preload = "auto";
+    sections[1].video.load();
+  }, 1200);
+}
+
+const firstVideo = sections[0].video;
+if (firstVideo.readyState >= 2) {
+  reveal();
+} else {
+  firstVideo.addEventListener("loadeddata", reveal, { once: true });
+  firstVideo.addEventListener("canplay", reveal, { once: true });
+}
+
+// Indicative progress bar while loading
+firstVideo.addEventListener("progress", () => {
+  if (revealed || !firstVideo.duration) return;
+  try {
+    if (firstVideo.buffered.length) {
+      const pct = (firstVideo.buffered.end(0) / firstVideo.duration) * 100;
+      loaderFill.style.width = `${Math.min(95, pct)}%`;
+    }
+  } catch (e) {}
+});
+
+// Safety net: whatever happens, show the page after 4s
+setTimeout(reveal, 4000);
+
+// Preload the third video when the layout section approaches
+const planosEl = document.getElementById("planos");
+if (planosEl && "IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) { ensureVideo3(); io.disconnect(); }
+  }, { rootMargin: "600px" });
+  io.observe(planosEl);
+} else {
+  setTimeout(ensureVideo3, 4000);
+}
+
+// ============ Gallery carousel ============
+const track = document.getElementById("carTrack");
+const slides = track.children.length;
+const dotsWrap = document.getElementById("carDots");
+let index = 0;
+
+for (let i = 0; i < slides; i++) {
+  const dot = document.createElement("button");
+  dot.className = "car-dot" + (i === 0 ? " active" : "");
+  dot.setAttribute("aria-label", `Photo ${i + 1}`);
+  dot.addEventListener("click", () => goTo(i));
+  dotsWrap.appendChild(dot);
+}
+
+function goTo(i) {
+  index = (i + slides) % slides;
+  track.style.transform = `translateX(-${index * 100}%)`;
+  dotsWrap.querySelectorAll(".car-dot").forEach((d, j) => {
+    d.classList.toggle("active", j === index);
+  });
+}
+
+document.getElementById("carPrev").addEventListener("click", () => goTo(index - 1));
+document.getElementById("carNext").addEventListener("click", () => goTo(index + 1));
+
+// Touch swipe on the carousel
+const viewport = document.querySelector(".car-viewport");
+let touchX = null;
+viewport.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+viewport.addEventListener("touchend", (e) => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 40) goTo(index + (dx < 0 ? 1 : -1));
+  touchX = null;
+}, { passive: true });
