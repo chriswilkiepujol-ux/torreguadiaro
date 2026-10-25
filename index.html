@@ -38,34 +38,47 @@
 
 <main>
 
-<!-- ───────── HERO ───────── -->
-<section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="img/hero.jpg" aria-hidden="true">
-    <source src="video/living.mp4" type="video/mp4">
-  </video>
-  <div class="hero-shade"></div>
-  <div class="hero-copy">
-    <p class="hero-kicker">Beachfront · Torreguadiaro, Sotogrande</p>
-    <h1>Seven floors above the sand, <em>the sea is the only neighbour.</em></h1>
-    <p class="hero-sub">A 130 m² three-bedroom apartment with a private terrace looking straight out over the beach and the Mediterranean, towards Gibraltar and the coast of Africa.</p>
-    <div class="hero-actions">
-      <a class="btn btn-light" href="#residence">Tour the apartment</a>
-      <a class="btn btn-ghost" href="#viewing">Request a viewing</a>
+<!-- ───────── SCENE 1: LIVING ROOM & TERRACE (hero) ───────── -->
+<section class="scene scene-hero" id="top-scene" data-scene data-src="scrub/living.mp4" data-full="video/living.mp4" data-poster="img/hero.jpg" style="--len: 420vh">
+  <div class="scene-pin">
+    <video class="scene-video" muted playsinline preload="auto" poster="img/hero.jpg" aria-hidden="true"></video>
+    <div class="scene-shade"></div>
+
+    <div class="scene-copy copy-hero" data-from="0" data-to="0.16">
+      <p class="hero-kicker">Beachfront · Torreguadiaro, Sotogrande</p>
+      <h1>Seven floors above the sand, <em>the sea is the only neighbour.</em></h1>
+      <p class="hero-sub">A 130 m² three-bedroom apartment with a private terrace looking straight out over the beach and the Mediterranean.</p>
+      <p class="scroll-cue"><span></span>Scroll to walk through</p>
     </div>
+
+    <div class="scene-copy copy-left" data-from="0.24" data-to="0.47">
+      <p class="caption-index">Living room</p>
+      <h2>Where the apartment faces the horizon</h2>
+      <p>The living and dining room runs the full width of the sea-facing façade. Floor-to-ceiling glazing, afternoon light, and a view that changes with every tide.</p>
+    </div>
+
+    <div class="scene-copy copy-right" data-from="0.55" data-to="0.8">
+      <p class="caption-index">Terrace</p>
+      <h2>The best seat in the house for the sunset</h2>
+      <p>A private glazed terrace deep enough for a dining table and loungers, with the beach directly below, the bay curving away towards Sotogrande and the Rock of Gibraltar on the horizon. Usable all year.</p>
+    </div>
+
+    <ul class="scene-copy hero-facts" data-from="0.84" data-to="1" aria-label="Key facts">
+      <li><strong>130</strong><span>m² built</span></li>
+      <li><strong>3</strong><span>double bedrooms</span></li>
+      <li><strong>2</strong><span>bathrooms, one en suite</span></li>
+      <li><strong>7th</strong><span>floor, lift access</span></li>
+    </ul>
+
+    <button class="watch-btn" type="button" data-watch aria-label="Watch the living room and terrace video with sound">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <span>Watch with sound</span>
+    </button>
+    <div class="scene-progress" aria-hidden="true"><span></span></div>
   </div>
-  <ul class="hero-facts" aria-label="Key facts">
-    <li><strong>130</strong><span>m² built</span></li>
-    <li><strong>3</strong><span>double bedrooms</span></li>
-    <li><strong>2</strong><span>bathrooms, one en suite</span></li>
-    <li><strong>7th</strong><span>floor, lift access</span></li>
-  </ul>
-  <button class="sound-btn" type="button" aria-pressed="false" data-sound>
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M16 9a4 4 0 0 1 0 6"/><path class="wave" d="M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>
-    <span>Sound</span>
-  </button>
 </section>
 
-<!-- ───────── INTRO ───────── -->
+<!-- ───────── INTERLUDE ───────── -->
 <section class="intro">
   <div class="wrap intro-grid">
     <h2>The last building before the water.</h2>
@@ -76,83 +89,62 @@
   </div>
 </section>
 
-<!-- ───────── RESIDENCE / VIDEO TOURS ───────── -->
-<section class="residence" id="residence">
-  <div class="wrap">
-    <header class="section-head">
-      <h2>The residence</h2>
-      <p>Three short walk-throughs, filmed on an ordinary afternoon. No staging, no wide-angle tricks.</p>
-    </header>
+<!-- ───────── SCENE 2: KITCHEN & GUEST ROOMS ───────── -->
+<section class="scene" id="residence" data-scene data-src="scrub/kitchen.mp4" data-full="video/kitchen.mp4" data-poster="img/kitchen.jpg" style="--len: 480vh">
+  <div class="scene-pin">
+    <video class="scene-video" muted playsinline preload="metadata" poster="img/kitchen.jpg" aria-hidden="true"></video>
+    <div class="scene-shade"></div>
+
+    <div class="scene-copy copy-left" data-from="0.02" data-to="0.27">
+      <p class="caption-index">Kitchen</p>
+      <h2>A kitchen with its own door</h2>
+      <p>Separate and fully fitted, with integrated appliances and a utility area, so the living room stays calm when someone is cooking.</p>
+    </div>
+
+    <div class="scene-copy copy-right" data-from="0.36" data-to="0.6">
+      <p class="caption-index">Guest bedroom one</p>
+      <h2>Room for family, and for guests who stay longer than planned</h2>
+      <p>A true double with fitted wardrobes, quiet and bright, and an easy study for anyone working between here and elsewhere.</p>
+    </div>
+
+    <div class="scene-copy copy-left" data-from="0.7" data-to="0.95">
+      <p class="caption-index">Guest bedroom two <span>&amp;</span> family bathroom</p>
+      <h2>Two doubles sharing a bathroom with a walk-in shower</h2>
+      <p>Both take a proper double bed with space to spare. The family bathroom sits between them off the hallway.</p>
+    </div>
+
+    <button class="watch-btn" type="button" data-watch aria-label="Watch the kitchen and guest rooms video with sound">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <span>Watch with sound</span>
+    </button>
+    <div class="scene-progress" aria-hidden="true"><span></span></div>
   </div>
+</section>
 
-  <article class="tour">
-    <figure class="tour-media">
-      <video playsinline preload="metadata" poster="img/living.jpg" data-tour>
-        <source src="video/living.mp4" type="video/mp4">
-      </video>
-      <button class="play" type="button" aria-label="Play: living room and terrace">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <figcaption>Living room and terrace · 0:39</figcaption>
-    </figure>
-    <div class="tour-copy">
-      <p class="tour-index">Living room <span>&amp;</span> terrace</p>
-      <h3>Where the apartment faces the horizon</h3>
-      <p>The living and dining room runs the full width of the sea-facing façade. Floor-to-ceiling glazing opens onto a private glazed terrace deep enough for a dining table and loungers, with the beach directly below, the bay curving away towards Sotogrande and the Rock of Gibraltar on the horizon. Usable all year, and the best seat in the house for the sunset.</p>
-      <ul class="tour-specs">
-        <li>Open-plan living and dining, around 38 m²</li>
-        <li>Enclosed, sea-facing terrace usable in every season</li>
-        <li>South-west orientation: sun from midday until sunset</li>
-        <li>Air conditioning, hot and cold</li>
-      </ul>
-    </div>
-  </article>
+<!-- ───────── SCENE 3: MASTER & EN SUITE ───────── -->
+<section class="scene" data-scene data-src="scrub/master.mp4" data-full="video/master.mp4" data-poster="img/master.jpg" style="--len: 360vh">
+  <div class="scene-pin">
+    <video class="scene-video" muted playsinline preload="metadata" poster="img/master.jpg" aria-hidden="true"></video>
+    <div class="scene-shade"></div>
 
-  <article class="tour tour-reverse">
-    <figure class="tour-media">
-      <video playsinline preload="metadata" poster="img/kitchen.jpg" data-tour>
-        <source src="video/kitchen.mp4" type="video/mp4">
-      </video>
-      <button class="play" type="button" aria-label="Play: kitchen and guest bedrooms">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <figcaption>Kitchen and guest bedrooms · 0:50</figcaption>
-    </figure>
-    <div class="tour-copy">
-      <p class="tour-index">Kitchen <span>&amp;</span> two guest bedrooms</p>
-      <h3>Room for family, and for guests who stay longer than planned</h3>
-      <p>A separate, fully fitted kitchen with integrated appliances and a utility area keeps the living room calm. Off the hallway, two double bedrooms with built-in wardrobes share the second bathroom. Both are quiet, both take a proper double bed with space to spare, and one makes an easy study for anyone working between here and elsewhere.</p>
-      <ul class="tour-specs">
-        <li>Independent kitchen with integrated appliances</li>
-        <li>Utility and laundry area</li>
-        <li>Two double bedrooms with fitted wardrobes</li>
-        <li>Family bathroom with walk-in shower</li>
-      </ul>
+    <div class="scene-copy copy-left" data-from="0.02" data-to="0.36">
+      <p class="caption-index">Master bedroom</p>
+      <h2>Wake up to the sea</h2>
+      <p>The principal bedroom looks straight out to sea through a wide picture window, with the rocks and the bay below. A full wall of fitted wardrobes keeps it uncluttered.</p>
     </div>
-  </article>
 
-  <article class="tour">
-    <figure class="tour-media">
-      <video playsinline preload="metadata" poster="img/master.jpg" data-tour>
-        <source src="video/master.mp4" type="video/mp4">
-      </video>
-      <button class="play" type="button" aria-label="Play: master bedroom and en suite bathroom">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <figcaption>Master bedroom and en suite · 0:34</figcaption>
-    </figure>
-    <div class="tour-copy">
-      <p class="tour-index">Master bedroom <span>&amp;</span> en suite</p>
-      <h3>Wake up to the sea</h3>
-      <p>The principal bedroom looks straight out to sea through a wide picture window, with the rocks and the bay below. A full wall of fitted wardrobes and a private en suite bathroom complete the suite. It is the room that sells the apartment to most people who see it.</p>
-      <ul class="tour-specs">
-        <li>Sea-facing master with picture window</li>
-        <li>Full wall of fitted wardrobes</li>
-        <li>Private en suite bathroom</li>
-        <li>Blackout blinds and air conditioning</li>
-      </ul>
+    <div class="scene-copy copy-right" data-from="0.5" data-to="0.92">
+      <p class="caption-index">En suite</p>
+      <h2>A private bathroom off the bedroom</h2>
+      <p>Walk-in shower, generous storage and a window of its own. It is the room that sells the apartment to most people who see it.</p>
     </div>
-  </article>
+
+    <button class="watch-btn" type="button" data-watch aria-label="Watch the master bedroom and en suite video with sound">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <span>Watch with sound</span>
+    </button>
+    <div class="scene-progress" aria-hidden="true"><span></span></div>
+  </div>
 </section>
 
 <!-- ───────── LOCATION ───────── -->
